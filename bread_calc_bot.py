@@ -6,14 +6,17 @@ from decimal import Decimal, ROUND_UP
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup)
 from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler,
                           InlineQueryHandler, ConversationHandler, MessageHandler, Filters)
+from datetime import datetime
+
 # Enable logging
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
 has_result = False
-
+has_entered = False
 
 ######################### Defs ##############################
 
@@ -36,13 +39,21 @@ END = ConversationHandler.END
 
 
 def calculator_submenu(update, context):
-    print("HERE CALC MENU")
+    #print(context)
+    # print("HERE CALC MENU")
+    global has_entered
+    if(has_entered == False):
+		dateTimeObj = datetime.now()
+		print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username
+		, update.effective_user.id,update.effective_user.first_name, update.effective_user.last_name,dateTimeObj))
+		has_entered = True
+
     global has_result
     ud = context.user_data
-    print ("Here Calc_Submenu")
+    #print ("Here Calc_Submenu")
     if not context.user_data.get(START_OVER):
         # context.user_data.clear()
-        print("HERE NOT GET STARTOVER")
+        #print("HERE NOT GET STARTOVER")
         if(has_result == True):
             has_result = False
             ResultText = ud[FEATURES]["RESULT"]
@@ -58,14 +69,14 @@ def calculator_submenu(update, context):
                     text=calculator_submenu_message(),
                     reply_markup=calculator_submenu_keyboard())
         else:
-            print("Here no result")
+            #print("Here no result")
             context.user_data[FEATURES] = {DOUGH_WEIGHT: ""}
             update.message.reply_text(calculator_submenu_message(),
                                       reply_markup=calculator_submenu_keyboard())
 
     # But after we do that, we need to send a new message
     else:
-        print("HERE GET STARTOVER")
+        #print("HERE GET STARTOVER")
         update.message.reply_text(
             text=calculator_submenu_message(),
             reply_markup=calculator_submenu_keyboard())
@@ -82,7 +93,7 @@ def param_switcher(param):
     elif param == "STARTER":
         return ('אחוז מחמצת (מספר בלבד)')
     elif param == "SALT":
-        return ('אחוז מלח (מספר בלדב)')
+        return ('אחוז מלח (מספר בלבד)')
     elif param == "SD_HYDRATION":
         return ('אחוז הידרציה במחמצת (מספר בלבד)')
     else:
@@ -91,7 +102,7 @@ def param_switcher(param):
 
 def ask_for_input(update, context):
     # Prompt user to input data for selected feature.
-    print("HERE_INPUT")
+    #print("HERE_INPUT")
     context.user_data[CURRENT_FEATURE] = update.callback_query.data
     update.callback_query.answer()
     update.callback_query.edit_message_text(
@@ -101,12 +112,12 @@ def ask_for_input(update, context):
 
 def save_input(update, context):
     """Save input for feature and return to feature selection."""
-    print("HERE SAVE_INPUT")
+    #print("HERE SAVE_INPUT")
     ud = context.user_data
     curr_param = str(ud[CURRENT_FEATURE])
     curr_input = int(update.message.text)
-    print(curr_param)
-    print(curr_input)
+    #print(curr_param)
+    #print(curr_input)
     if(curr_input <= 0):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
@@ -126,7 +137,7 @@ def save_input(update, context):
 
 def back_calc(update, context):
     """End conversation from InlineKeyboardButton."""
-    print("BACK")
+    #print("BACK")
 
     return CALCULATOR_SUBMENU
 
@@ -144,12 +155,12 @@ def reset_data(update, context):
 
 
 def calculate(update, context):
-    print("HERE CALC")
+    #print("HERE CALC")
     ud = context.user_data
     if not ud[FEATURES].get("DOUGH_WEIGHT") or not ud[FEATURES].get("HYDRATION") \
             or not ud[FEATURES].get("STARTER") or not ud[FEATURES].get("SALT") \
             or not ud[FEATURES].get("SD_HYDRATION"):
-        print("Here")
+        #print("Here")
         #query = update.callback_query
         context.bot.send_message(
             chat_id=update.message.chat_id, text="נא ודא שהזנת את כל הפרמטרים.")
@@ -161,7 +172,7 @@ def calculate(update, context):
     Final_Hydration = float(ud[FEATURES]["HYDRATION"])/100
     Starter_Per = float(ud[FEATURES]["STARTER"])/100
     Salt_Per = float(ud[FEATURES]["SALT"])/100
-    # print(Starter_Per)
+    # #print(Starter_Per)
     Starter_Water_Per = Starter_Per/(1+(1/Starter_Hydration))
     Starter_Solid_Per = Starter_Per - Starter_Water_Per
     Water_Per = Final_Hydration * \
@@ -170,18 +181,21 @@ def calculate(update, context):
     Starter = Starter_Per * Flour
     Salt = Salt_Per * Flour
     Water = Water_Per * Flour
-    print("Starter hydrartion: {} , Final Hydration: {}".format(
-        Starter_Hydration, Final_Hydration))
-    print("Bread with total flour of {}g, {}g Water, {}g Starter, {}g Salt".format(
-        Flour, Water, Starter, Salt))
+    #print("Starter hydrartion: {} , Final Hydration: {}".format(
+        # Starter_Hydration, Final_Hydration))
+    #print("Bread with total flour of {}g, {}g Water, {}g Starter, {}g Salt".format(
+        # Flour, Water, Starter, Salt))
     calc_text = "קמח: {:.1f} גרם\n מים: {:.1f} גרם\n מחמצת: {:.1f} גרם\n מלח: {:.1f} גרם\n".format(
         Flour, Water, Starter, Salt)
     ud[FEATURES]["RESULT"] = calc_text
     # update.message.reply_text(text=calc_text)
-    # print(ud[FEATURES]["RESULT"])
+    # #print(ud[FEATURES]["RESULT"])
     # update.callback_query.answer()
     ud[START_OVER] = False
-    # print(update.callback_query)
+    # #print(update.callback_query)
+    dateTimeObj = datetime.now()
+    print("User calculated:\n Username: {} ID: {} Named: {} {} At {}".format(update.effective_user.username
+    	, update.effective_user.id,update.effective_user.first_name, update.effective_user.last_name,dateTimeObj))
     global has_result
     has_result = True
     return calculator_submenu(update, context)
@@ -207,7 +221,7 @@ def calculator_submenu_keyboard():
 
 def error(update, context):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    # logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 def calculator_submenu_message():
@@ -230,13 +244,13 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    PORT = int(os.environ.get('PORT', 5000))
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
+    # PORT = int(os.environ.get('PORT', 5000))
+    # updater.start_webhook(listen="0.0.0.0",
+    #                       port=int(PORT),
+    #                       url_path=TOKEN)
 
-    updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
-    print("HERE_MAIN")
+    # updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
+    #print("HERE_MAIN")
 
     #updater.dispatcher.add_handler(CallbackQueryHandler(ask_for_input, pattern='m2_1_1'))
 
@@ -265,6 +279,7 @@ def main():
     dp.add_handler(calculator_conv_handler)
     dp.add_error_handler(error)
     updater.start_polling()
+
     updater.idle()
 
 

@@ -49,7 +49,7 @@ def calculator_submenu(update,context):
 				query.edit_message_text(
 						text=calculator_submenu_message(),
 						reply_markup=calculator_submenu_keyboard())
-		 	else:
+			else:
 				update.message.reply_text(
 							text=calculator_submenu_message(),
 							reply_markup=calculator_submenu_keyboard())		

@@ -160,10 +160,10 @@ def calculate(update, context):
     if not ud[FEATURES].get("DOUGH_WEIGHT") or not ud[FEATURES].get("HYDRATION") \
             or not ud[FEATURES].get("STARTER") or not ud[FEATURES].get("SALT") \
             or not ud[FEATURES].get("SD_HYDRATION"):
-        # print("Here")
-        #query = update.callback_query
-        context.bot.send_message(
-            chat_id=update.message.chat_id, text="נא ודא שהזנת את כל הפרמטרים.")
+        print("Here")
+        query = update.callback_query
+        query.answer()
+        update.callback_query.edit_message_text("נא ודא שהזנת את כל הפרמטרים.")
         ud[START_OVER] = True
         return calculator_submenu(update, context)
 
@@ -221,7 +221,7 @@ def calculator_submenu_keyboard():
 
 def error(update, context):
     """Log Errors caused by Updates."""
-    # logger.warning('Update "%s" caused error "%s"', update, context.error)
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 def calculator_submenu_message():
@@ -244,12 +244,12 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    PORT = int(os.environ.get('PORT', 5000))
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
+    # PORT = int(os.environ.get('PORT', 5000))
+    # updater.start_webhook(listen="0.0.0.0",
+    #                       port=int(PORT),
+    #                       url_path=TOKEN)
 
-    updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
+    # updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
     # print("HERE_MAIN")
 
     #updater.dispatcher.add_handler(CallbackQueryHandler(ask_for_input, pattern='m2_1_1'))

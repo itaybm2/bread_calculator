@@ -39,14 +39,14 @@ END = ConversationHandler.END
 
 
 def calculator_submenu(update, context):
-    #print(context)
+    # print(context)
     # print("HERE CALC MENU")
     global has_entered
     if(has_entered == False):
-		dateTimeObj = datetime.now()
-		print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username
-		, update.effective_user.id,update.effective_user.first_name, update.effective_user.last_name,dateTimeObj))
-		has_entered = True
+        dateTimeObj = datetime.now()
+        print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
+                                                                                       update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
+        has_entered = True
 
     global has_result
     ud = context.user_data
@@ -102,7 +102,7 @@ def param_switcher(param):
 
 def ask_for_input(update, context):
     # Prompt user to input data for selected feature.
-    #print("HERE_INPUT")
+    # print("HERE_INPUT")
     context.user_data[CURRENT_FEATURE] = update.callback_query.data
     update.callback_query.answer()
     update.callback_query.edit_message_text(
@@ -116,8 +116,8 @@ def save_input(update, context):
     ud = context.user_data
     curr_param = str(ud[CURRENT_FEATURE])
     curr_input = int(update.message.text)
-    #print(curr_param)
-    #print(curr_input)
+    # print(curr_param)
+    # print(curr_input)
     if(curr_input <= 0):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
@@ -137,7 +137,7 @@ def save_input(update, context):
 
 def back_calc(update, context):
     """End conversation from InlineKeyboardButton."""
-    #print("BACK")
+    # print("BACK")
 
     return CALCULATOR_SUBMENU
 
@@ -160,7 +160,7 @@ def calculate(update, context):
     if not ud[FEATURES].get("DOUGH_WEIGHT") or not ud[FEATURES].get("HYDRATION") \
             or not ud[FEATURES].get("STARTER") or not ud[FEATURES].get("SALT") \
             or not ud[FEATURES].get("SD_HYDRATION"):
-        #print("Here")
+        # print("Here")
         #query = update.callback_query
         context.bot.send_message(
             chat_id=update.message.chat_id, text="נא ודא שהזנת את כל הפרמטרים.")
@@ -181,10 +181,10 @@ def calculate(update, context):
     Starter = Starter_Per * Flour
     Salt = Salt_Per * Flour
     Water = Water_Per * Flour
-    #print("Starter hydrartion: {} , Final Hydration: {}".format(
-        # Starter_Hydration, Final_Hydration))
-    #print("Bread with total flour of {}g, {}g Water, {}g Starter, {}g Salt".format(
-        # Flour, Water, Starter, Salt))
+    # print("Starter hydrartion: {} , Final Hydration: {}".format(
+    # Starter_Hydration, Final_Hydration))
+    # print("Bread with total flour of {}g, {}g Water, {}g Starter, {}g Salt".format(
+    # Flour, Water, Starter, Salt))
     calc_text = "קמח: {:.1f} גרם\n מים: {:.1f} גרם\n מחמצת: {:.1f} גרם\n מלח: {:.1f} גרם\n".format(
         Flour, Water, Starter, Salt)
     ud[FEATURES]["RESULT"] = calc_text
@@ -194,8 +194,8 @@ def calculate(update, context):
     ud[START_OVER] = False
     # #print(update.callback_query)
     dateTimeObj = datetime.now()
-    print("User calculated:\n Username: {} ID: {} Named: {} {} At {}".format(update.effective_user.username
-    	, update.effective_user.id,update.effective_user.first_name, update.effective_user.last_name,dateTimeObj))
+    print("User calculated:\n Username: {} ID: {} Named: {} {} At {}".format(update.effective_user.username,
+                                                                             update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
     global has_result
     has_result = True
     return calculator_submenu(update, context)

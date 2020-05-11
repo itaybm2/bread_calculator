@@ -44,11 +44,11 @@ def calculator_submenu(update,context):
 			ResultText = ud[FEATURES]["RESULT"]
 			update.effective_message.reply_text(ResultText)
 			if(update.callback_query):
-			 	query = update.callback_query
+				query = update.callback_query
 				query.answer()
-			 	query.edit_message_text(
-							text=calculator_submenu_message(),
-							reply_markup=calculator_submenu_keyboard())
+				query.edit_message_text(
+						text=calculator_submenu_message(),
+						reply_markup=calculator_submenu_keyboard())
 		 	else:
 				update.message.reply_text(
 							text=calculator_submenu_message(),

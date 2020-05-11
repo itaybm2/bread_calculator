@@ -244,13 +244,13 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    # PORT = int(os.environ.get('PORT', 5000))
-    # updater.start_webhook(listen="0.0.0.0",
-    #                       port=int(PORT),
-    #                       url_path=TOKEN)
+    PORT = int(os.environ.get('PORT', 5000))
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
 
-    # updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
-    # # print("HERE_MAIN")
+    updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
+    # print("HERE_MAIN")
 
     #updater.dispatcher.add_handler(CallbackQueryHandler(ask_for_input, pattern='m2_1_1'))
 

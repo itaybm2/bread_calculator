@@ -163,7 +163,7 @@ def calculate(update, context):
         print("Here")
         query = update.callback_query
         query.answer()
-        update.callback_query.reply_text("נא ודא שהזנת את כל הפרמטרים.")
+        context.bot.send_message(chat_id=query.message.chat_id,text="נא ודא שמילאת את כל הפרמטרים.")
         ud[START_OVER] = True
         return calculator_submenu(update, context)
 
@@ -250,7 +250,7 @@ def main():
     #                       url_path=TOKEN)
 
     # updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
-    # print("HERE_MAIN")
+    # # print("HERE_MAIN")
 
     #updater.dispatcher.add_handler(CallbackQueryHandler(ask_for_input, pattern='m2_1_1'))
 

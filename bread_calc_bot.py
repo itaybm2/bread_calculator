@@ -163,7 +163,7 @@ def calculate(update, context):
         print("Here")
         query = update.callback_query
         query.answer()
-        update.callback_query.edit_message_text("נא ודא שהזנת את כל הפרמטרים.")
+        update.callback_query.reply_text("נא ודא שהזנת את כל הפרמטרים.")
         ud[START_OVER] = True
         return calculator_submenu(update, context)
 

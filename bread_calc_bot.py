@@ -7,6 +7,7 @@ from telegram import (InlineKeyboardButton, InlineKeyboardMarkup)
 from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler,
                           InlineQueryHandler, ConversationHandler, MessageHandler, Filters)
 from datetime import datetime
+import pytz
 
 # Enable logging
 
@@ -43,7 +44,7 @@ def calculator_submenu(update, context):
     # print("HERE CALC MENU")
     global has_entered
     if(has_entered == False):
-        dateTimeObj = datetime.now()
+        dateTimeObj = datetime.now(pytz.timezone('Etc/GMT-2'))
         print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                                        update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
         has_entered = True

@@ -129,7 +129,7 @@ def save_input(update, context):
         ud[START_OVER] = True
         return calculator_submenu(update, context)
     if(curr_param != "DOUGH_WEIGHT"):
-        if(curr_input not in range(1, 101)):
+        if(curr_input > 100 or curr_input < 0):
             context.bot.send_message(
                 chat_id=update.message.chat_id, text=invalid_input_message())
             ud[START_OVER] = True

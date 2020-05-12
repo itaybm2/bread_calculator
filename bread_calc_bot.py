@@ -42,7 +42,7 @@ def calculator_submenu(update, context,has_entered = False):
     # print(context)
     # print("HERE CALC MENU")
     if(has_entered == False):
-        dateTimeObj = datetime.now(pytz.timezone('Etc/GMT-2'))
+        dateTimeObj = datetime.now(pytz.timezone('Israel'))
         print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                                        update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
         has_entered = True

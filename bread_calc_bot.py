@@ -120,6 +120,7 @@ def save_input(update, context):
         curr_input = Decimal(update.message.text)
     except:
         isDecimal = False
+    print("isDecimal = {}".format(isDecimal))
     # print(curr_param)
     # print(curr_input)
     if(isDecimal == False or curr_input <= 0):

@@ -122,7 +122,7 @@ def save_input(update, context):
         isDecimal = False
     # print(curr_param)
     # print(curr_input)
-    if(curr_input <= 0 or isDecimal == False):
+    if(isDecimal == False or curr_input <= 0):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True

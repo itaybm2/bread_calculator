@@ -118,7 +118,7 @@ def save_input(update, context):
     curr_input = Decimal(update.message.text)
     # print(curr_param)
     # print(curr_input)
-    if(curr_input <= 0 or curr_input.isdigit() == False):
+    if(curr_input <= 0 or curr_input is None):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True

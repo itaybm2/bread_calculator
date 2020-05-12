@@ -43,7 +43,7 @@ def calculator_submenu(update, context,has_entered = False):
     # print("HERE CALC MENU")
     if(has_entered == False):
         dateTimeObj = datetime.now(pytz.timezone('Israel'))
-        print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
+        print("User started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                                        update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
         has_entered = True
 
@@ -205,7 +205,7 @@ def calculate(update, context):
     ud[START_OVER] = False
     # #print(update.callback_query)
     dateTimeObj = datetime.now(pytz.timezone('Israel'))
-    print("User calculated:\n Username: {} ID: {} Named: {} {} At {}".format(update.effective_user.username,
+    print("User calculated:\n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                              update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
     global has_result
     has_result = True

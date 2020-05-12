@@ -204,7 +204,7 @@ def calculate(update, context):
     # update.callback_query.answer()
     ud[START_OVER] = False
     # #print(update.callback_query)
-    dateTimeObj = datetime.now()
+    dateTimeObj = datetime.now(pytz.timezone('Israel'))
     print("User calculated:\n Username: {} ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                              update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
     global has_result

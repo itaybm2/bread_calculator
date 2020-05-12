@@ -70,15 +70,30 @@ def calculator_submenu(update, context,has_entered = False):
         else:
             #print("Here no result")
             context.user_data[FEATURES] = {DOUGH_WEIGHT: ""}
-            update.message.reply_text(calculator_submenu_message(),
-                                      reply_markup=calculator_submenu_keyboard())
-
+            if(update.callback_query):
+                query = update.callback_query
+                query.answer()
+                query.edit_message_text(
+                    text=calculator_submenu_message(),
+                    reply_markup=calculator_submenu_keyboard())
+            else:
+                update.message.reply_text(
+                    text=calculator_submenu_message(),
+                    reply_markup=calculator_submenu_keyboard())
+           
     # But after we do that, we need to send a new message
     else:
         #print("HERE GET STARTOVER")
-        update.message.reply_text(
-            text=calculator_submenu_message(),
-            reply_markup=calculator_submenu_keyboard())
+        if(update.callback_query):
+            query = update.callback_query
+            query.answer()
+            query.edit_message_text(
+                text=calculator_submenu_message(),
+                reply_markup=calculator_submenu_keyboard())
+        else:
+            update.message.reply_text(
+                text=calculator_submenu_message(),
+                reply_markup=calculator_submenu_keyboard())
         context.user_data[START_OVER] = False
     return CALCULATOR_SUBMENU
 
@@ -246,7 +261,7 @@ def main():
                           url_path=TOKEN)
 
     updater.bot.setWebhook('https://breadcalcapp.herokuapp.com/' + TOKEN)
-    # print("HERE_MAIN")
+    print("HERE_MAIN")
 
     #updater.dispatcher.add_handler(CallbackQueryHandler(ask_for_input, pattern='m2_1_1'))
 

@@ -17,7 +17,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 has_result = False
-has_entered = False
 
 ######################### Defs ##############################
 
@@ -39,10 +38,9 @@ END = ConversationHandler.END
 ######################### Calculator #########################
 
 
-def calculator_submenu(update, context):
+def calculator_submenu(update, context,has_entered = False):
     # print(context)
     # print("HERE CALC MENU")
-    global has_entered
     if(has_entered == False):
         dateTimeObj = datetime.now(pytz.timezone('Etc/GMT-2'))
         print("New user started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
@@ -128,17 +126,17 @@ def save_input(update, context):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True
-        return calculator_submenu(update, context)
+        return calculator_submenu(update, context,True)
     if(curr_param != "DOUGH_WEIGHT"):
         if(curr_input > 100 or curr_input < 0):
             context.bot.send_message(
                 chat_id=update.message.chat_id, text=invalid_input_message())
             ud[START_OVER] = True
-            return calculator_submenu(update, context)
+            return calculator_submenu(update, context,True)
 
     ud[FEATURES][ud[CURRENT_FEATURE]] = curr_input
     ud[START_OVER] = True
-    return calculator_submenu(update, context)
+    return calculator_submenu(update, context,True)
 
 
 def back_calc(update, context):
@@ -152,14 +150,6 @@ def invalid_input(update, context):
     update.reply_text(text=invalid_input_message())
 
 
-def reset_data(update, context):
-    global has_result
-    ud = context.user_data
-    ud[START_OVER] = False
-    has_result = False
-    return calculator_submenu(update, context)
-
-
 def calculate(update, context):
     #print("HERE CALC")
     ud = context.user_data
@@ -171,7 +161,7 @@ def calculate(update, context):
         query.answer()
         context.bot.send_message(chat_id=query.message.chat_id,text="נא ודא שמילאת את כל הפרמטרים.")
         ud[START_OVER] = True
-        return calculator_submenu(update, context)
+        return calculator_submenu(update, context,True)
 
     Dough_Weight = float(ud[FEATURES]["DOUGH_WEIGHT"])
     Starter_Hydration = float(ud[FEATURES]["SD_HYDRATION"])/100
@@ -204,7 +194,7 @@ def calculate(update, context):
                                                                              update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
     global has_result
     has_result = True
-    return calculator_submenu(update, context)
+    return calculator_submenu(update, context,True)
 
 ######################### Keyboards ###############################
 
@@ -267,10 +257,8 @@ def main():
                 CallbackQueryHandler(
                     ask_for_input, pattern='(DOUGH_WEIGHT|HYDRATION|STARTER|SALT|SD_HYDRATION)'),
                 CallbackQueryHandler(
-                    calculate, pattern='^' + str(CALCULATE) + '$'),
-                CallbackQueryHandler(
-                    reset_data, pattern='^' + str(RESET) + '$')
-            ],
+                    calculate, pattern='^' + str(CALCULATE) + '$')
+                ],
             SAVE_INPUT: [
                 MessageHandler(Filters.text, save_input)
             ]

@@ -118,7 +118,7 @@ def save_input(update, context):
     curr_input = int(update.message.text)
     # print(curr_param)
     # print(curr_input)
-    if(curr_input <= 0):
+    if(curr_input <= 0 or curr_param.isdigit() == False):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True
@@ -244,7 +244,7 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    PORT = int(os.environ.get('PORT', 5000))
+cat    PORT = int(os.environ.get('PORT', 5000))
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=TOKEN)

@@ -114,11 +114,15 @@ def save_input(update, context):
     """Save input for feature and return to feature selection."""
     #print("HERE SAVE_INPUT")
     ud = context.user_data
+    isDecimal = True
     curr_param = str(ud[CURRENT_FEATURE])
-    curr_input = Decimal(update.message.text)
+    try:
+        curr_input = Decimal(update.message.text)
+    except:
+        isDecimal = False
     # print(curr_param)
     # print(curr_input)
-    if(curr_input <= 0 or curr_input is None):
+    if(curr_input <= 0 or isDecimal == False):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True

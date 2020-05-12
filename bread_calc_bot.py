@@ -115,10 +115,10 @@ def save_input(update, context):
     #print("HERE SAVE_INPUT")
     ud = context.user_data
     curr_param = str(ud[CURRENT_FEATURE])
-    curr_input = int(update.message.text)
+    curr_input = Decimal(update.message.text)
     # print(curr_param)
     # print(curr_input)
-    if(curr_input <= 0 or curr_param.isdigit() == False):
+    if(curr_input <= 0 or curr_input.isdigit() == False):
         context.bot.send_message(
             chat_id=update.message.chat_id, text=invalid_input_message())
         ud[START_OVER] = True

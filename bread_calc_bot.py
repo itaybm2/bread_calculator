@@ -12,8 +12,6 @@ import pytz
 
 # Enable logging
 
-log = open("userlog.log","a")
-sys.stdout = log
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -43,11 +41,15 @@ END = ConversationHandler.END
 
 
 def calculator_submenu(update, context,has_entered = False):
+    my_path = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(my_path, "users.log")
+    log = open(path,"w")
+
     # print(context)
     # print("HERE CALC MENU")
     if(has_entered == False):
         dateTimeObj = datetime.now(pytz.timezone('Israel'))
-        print("User started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
+        log.write("User started \n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                                        update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
         has_entered = True
 
@@ -209,7 +211,10 @@ def calculate(update, context):
     ud[START_OVER] = False
     # #print(update.callback_query)
     dateTimeObj = datetime.now(pytz.timezone('Israel'))
-    print("User calculated:\n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
+    my_path = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(my_path, "users.log")
+    log = open(path,"w")
+    log.write("User calculated:\n Username: {} with ID: {} Named: {} {} At {}".format(update.effective_user.username,
                                                                              update.effective_user.id, update.effective_user.first_name, update.effective_user.last_name, dateTimeObj))
     global has_result
     has_result = True

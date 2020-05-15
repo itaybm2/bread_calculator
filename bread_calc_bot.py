@@ -11,6 +11,9 @@ import pytz
 
 # Enable logging
 
+log = open("userlog.log","a")
+sys.stdout = log
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
@@ -134,7 +137,7 @@ def save_input(update, context):
         curr_input = Decimal(update.message.text)
     except:
         isDecimal = False
-    print("isDecimal = {}".format(isDecimal))
+    # print("isDecimal = {}".format(isDecimal))
     # print(curr_param)
     # print(curr_input)
     if(isDecimal == False or curr_input <= 0):
@@ -171,7 +174,7 @@ def calculate(update, context):
     if not ud[FEATURES].get("DOUGH_WEIGHT") or not ud[FEATURES].get("HYDRATION") \
             or not ud[FEATURES].get("STARTER") or not ud[FEATURES].get("SALT") \
             or not ud[FEATURES].get("SD_HYDRATION"):
-        print("Here")
+        # print("Here")
         query = update.callback_query
         query.answer()
         context.bot.send_message(chat_id=query.message.chat_id,text="נא ודא שמילאת את כל הפרמטרים.")

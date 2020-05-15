@@ -251,7 +251,7 @@ def invalid_input_message():
 
 def main():
 
-    TOKEN = "1101253121:AAE4PYymb20uVQ5MaJvhmczdgYa_Ykg8Bqo"
+    TOKEN = "ENTER TOKEN HERE"
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 

@@ -260,10 +260,14 @@ def invalid_input_message():
 
 def main():
 
+<<<<<<< HEAD
 	TOKEN = None
 
 	with open("token.txt") as f:
 	    TOKEN = f.read().strip()
+=======
+    TOKEN = "1101253121:AAEDIWXpVW15ALgkpG6ekja1PxtbHjBngIY"
+>>>>>>> f4cf03038a52c89bd8dd51c7ae78374f83bb8bb9
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 

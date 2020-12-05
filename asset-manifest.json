@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/test_react/static/css/main.9cab1e40.chunk.css",
+    "main.js": "/test_react/static/js/main.bacee291.chunk.js",
+    "main.js.map": "/test_react/static/js/main.bacee291.chunk.js.map",
+    "runtime-main.js": "/test_react/static/js/runtime-main.ebf2db9d.js",
+    "runtime-main.js.map": "/test_react/static/js/runtime-main.ebf2db9d.js.map",
+    "static/js/2.e6f99092.chunk.js": "/test_react/static/js/2.e6f99092.chunk.js",
+    "static/js/2.e6f99092.chunk.js.map": "/test_react/static/js/2.e6f99092.chunk.js.map",
+    "static/js/3.5e929db3.chunk.js": "/test_react/static/js/3.5e929db3.chunk.js",
+    "static/js/3.5e929db3.chunk.js.map": "/test_react/static/js/3.5e929db3.chunk.js.map",
+    "index.html": "/test_react/index.html",
+    "static/css/main.9cab1e40.chunk.css.map": "/test_react/static/css/main.9cab1e40.chunk.css.map",
+    "static/js/2.e6f99092.chunk.js.LICENSE.txt": "/test_react/static/js/2.e6f99092.chunk.js.LICENSE.txt",
+    "static/media/Collage.06a8e72e.png": "/test_react/static/media/Collage.06a8e72e.png",
+    "static/media/pic1.bafb7eb5.png": "/test_react/static/media/pic1.bafb7eb5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ebf2db9d.js",
+    "static/js/2.e6f99092.chunk.js",
+    "static/css/main.9cab1e40.chunk.css",
+    "static/js/main.bacee291.chunk.js"
+  ]
+}

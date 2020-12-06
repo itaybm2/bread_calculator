@@ -1,15 +1,28 @@
 import React from 'react';
 import './App.css';
 import FormControl from '@material-ui/core/FormControl';
+import { createMuiTheme, withStyles, styled } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormLabel from '@material-ui/core/FormLabel';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia'
 import Pic from "./Collage.png";
-import Pic1 from "./pic1.png";
+import Grid from '@material-ui/core/Grid';
 
+
+const styles = (theme) => ({
+    root: {},
+    media: {
+        height: 0,
+        width: 0
+    },
+    root: {
+
+    }
+});
 
 class App extends React.Component {
     constructor(props) {
@@ -102,25 +115,34 @@ class App extends React.Component {
         });
     }
 
-    render() {
-        const {classes} = this.props;
-        const styles =
-        {
 
-            media: {
-                height:'50%'
+    render() {
+        const { classes } = this.props;
+
+        const Typ = withStyles({
+            root: {
+                color: "#92540d",
             }
-        };
+        })(Typography);
+
+        const styledBox = withStyles({
+            root: {
+                display: "flex",
+            }
+        })(Box);
+
         return (
             <Box>
-                <Typography component="h1" variant="h4">Sourdough Calculator</Typography>
-                <Box id="calc" className='flex-container'>
-                    <Box className="column1">
-                        <h1 id="heading">Ingredients:</h1>
-                        <form id="calculator-form" onSubmit={this.handleSubmit} >
-                            <Box class="form-group">
-                                <InputLabel>Dough Weight (g)</InputLabel>
+                <Grid margin="50px" container spacing={1} justify="center">
+                    <Grid item xs={12}>
+                        <Typ variant="h2" component="h1" display="flex">Sourdough Bread Calculator</Typ>
+                    </Grid>
+                    <Grid item className="root" xs={2}>
+                        <Box>
+                            <FormControl className="form" onSubmit={this.handleSubmit} >
+                                <Typ variant="h5" >Ingredients:</Typ>
                                 <TextField
+                                    label="Dough Weight"
                                     type="number"
                                     name="dough_weight"
                                     id="dough_weight"
@@ -130,14 +152,9 @@ class App extends React.Component {
                                     value={this.state.fields.dough_weight}
                                     onChange={this.handleChange.bind(this, "dough_weight")}
                                 />
-                                <Box>
-                                    <span style={{ color: "red" }}>{this.state.errors["dough_weight"]}</span>
-                                </Box>
-                            </Box>
 
-                            <Box class="form-group">
-                                <InputLabel for="formGroupExampleInput">Final Hydration (%)</InputLabel>
                                 <TextField
+                                    label="Hydration"
                                     type="number"
                                     name="hydration"
                                     id="hydration"
@@ -147,15 +164,10 @@ class App extends React.Component {
                                     value={this.state.fields.hydration}
                                     onChange={this.handleChange.bind(this, "hydration")}
                                 />
-                                <Box>
-                                    <span style={{ color: "red" }}>{this.state.errors["hydration"]}</span>
-                                </Box>
-                            </Box>
 
-                            <Box class="form-group">
-                                <InputLabel for="formGroupExampleInput">Starter (%)</InputLabel>
                                 <TextField
                                     type="number"
+                                    label="Starter"
                                     name="starter"
                                     id="starter"
                                     min="0"
@@ -164,14 +176,9 @@ class App extends React.Component {
                                     value={this.state.fields.starter}
                                     onChange={this.handleChange.bind(this, "starter")}
                                 />
-                                <Box>
-                                    <span style={{ color: "red" }}>{this.state.errors["starter"]}</span>
-                                </Box>
-                            </Box>
 
-                            <Box class="form-group">
-                                <InputLabel for="formGroupExampleInput">Starter Hydration (%)</InputLabel>
                                 <TextField
+                                    label="Starter Hydration"
                                     type="number"
                                     name="starter_hydration"
                                     id="starter_hydration"
@@ -181,16 +188,12 @@ class App extends React.Component {
                                     value={this.state.fields.starter_hydration}
                                     onChange={this.handleChange.bind(this, "starter_hydration")}
                                 />
-                                <Box>
-                                    <span style={{ color: "red" }}>{this.state.errors["starter_hydration"]}</span>
-                                </Box>
-                            </Box>
 
-                            <Box class="form-group">
-                                <InputLabel for="formGroupExampleInput">Salt (%)</InputLabel>
                                 <TextField
+                                    label="Salt"
                                     type="number"
                                     name="salt"
+                                    errorte
                                     id="salt"
                                     min="0"
                                     max="100"
@@ -198,56 +201,72 @@ class App extends React.Component {
                                     value={this.state.fields.salt}
                                     onChange={this.handleChange.bind(this, "salt")}
                                 />
+
+                            </FormControl>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={1} justify="center" className="root">
+                        <Box display="flex-box">
+                            <Typ variant="h5">Totals:</Typ>
+                            <Box>
+                                <strong>Flour: </strong>
+                                <text
+                                    id="result_flour"
+                                >0g
+                                </text>
+                            </Box>
+                            <Box>
+                                <strong>Water: </strong>
+                                <text
+                                    id="result_water"
+                                >0g
+                                </text>
+                            </Box>
+                            <Box>
+                                <strong>Starter: </strong>
+                                <text
+                                    id="result_starter"
+                                >0g
+                                </text>
+                            </Box>
+                            <Box>
+                                <strong>Salt: </strong>
+                                <text
+                                    id="result_salt"
+                                >0g
+                                </text>
+                            </Box>
+                        </Box>
+                    </Grid>
+                    <Grid item md = {4}>
+                            <CardMedia src={Pic} component="img"></CardMedia>
+                    </Grid>
+                        <Grid item lg={9} spacing={2}>
+                            <Box margin={5} display="flex" justifyContent="center">
+                                <Box paddingRight="20%">
+                                    <Button
+                                        variant="outlined"
+                                        padding="20px"
+                                        type="submit"
+                                        value="Submit"
+                                        onClick={this.handleSubmit}
+                                    >Calculate</Button>
+                                </Box>
                                 <Box>
-                                    <span className='error' style={{ color: "red" }}>{this.state.errors["salt"]}</span>
+                                    <Button
+                                        border="1px"
+                                        padding="40px"
+                                        variant="outlined"
+                                        onClick={this.clearAll}
+                                        className="div_button"
+                                    >Clear</Button>
                                 </Box>
                             </Box>
-                            <Box className="div_button">
-                                <Button type="submit" value="Submit">Calculate</Button>
-                                <Button
-                                    onClick={this.clearAll}
-                                    className="div_button"
-                                >Clear</Button>
-                            </Box>
-                        </form>
-                    </Box>
-                    <Box class="column2" onChange={this.handleChange} >
-                        <h1>Totals:</h1>
-                        <Box>
-                            <strong>Flour: </strong>
-                            <text
-                                id="result_flour"
-                            >0g
-        </text>
-                        </Box>
-                        <Box>
-                            <strong>Water: </strong>
-                            <text
-                                id="result_water"
-                            >0g
-    </text>
-                        </Box>
-                        <Box>
-                            <strong>Starter: </strong>
-                            <text
-                                id="result_starter"
-                            >
-                                0g
-                            </text>
-                        </Box>
-                        <Box>
-                            <strong>Salt: </strong>
-                            <text
-                                id="result_salt"
-                            >0g
-                            </text>
-                        </Box>
-                    </Box>
-                {/* <CardMedia src={Pic} styles={styles.media} component="img" /> */}
-                </Box>
+                        </Grid>
+                    </Grid >
             </Box>
         );
     }
 }
 
-export default App;
+export default withStyles(styles)(App);

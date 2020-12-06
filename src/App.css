@@ -28,15 +28,8 @@ text {
   margin: auto;
 }
 
-.flex-container {
-  min-height: 20%;
-  justify-content: center;
-  align-self: center;
-  display: flex;
-  margin: 2%;
-}
-
-.img1,.img2 {
+.img1,
+.img2 {
   display: flex;
   max-height: 60%;
   max-width: 60%;
@@ -44,21 +37,22 @@ text {
   border-color: white;
   border-width: 1px;
   border-style: solid;
-  border-radius: auto;
   margin: auto;
 
 }
+
 
 .column1,
 .column2 {
   background-color: beige;
   border-radius: 15px;
+  width: 20%;
   padding: 2%;
-  /* width:50%; */
+  justify-content: center;
+  align-items: center;
   border-style: dashed;
   border-width: 1px;
   margin: 2%;
-  display: flexbox;
   border-color: brown;
 }
 
@@ -69,22 +63,19 @@ label {
   font-family: Assistant;
 }
 
-input {
-  margin-bottom: 5%;
-}
 
 body {
   background-color: rgb(209, 201, 186);
 }
 
 .div_button {
-  align-self:center;
-  align-items:bottom;
+  align-self: center;
+  align-items: bottom;
   justify-content: center;
-  display:flex;
+  display: flex;
 }
 
 button {
-  display:block;
-  margin:auto;
+  display: block;
+  margin: auto;
 }

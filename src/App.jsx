@@ -249,7 +249,7 @@ class App extends React.Component {
                                         padding="20px"
                                         type="submit"
                                         value="Submit"
-                                        onClick={this.handleSubmit}
+                           gi             onClick={this.handleSubmit}
                                     >Calculate</Button>
                                 </Box>
                                 <Box>

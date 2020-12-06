@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Helmet from 'react-helmet';
 import FormControl from '@material-ui/core/FormControl';
 import { createMuiTheme, withStyles, styled } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -132,7 +133,13 @@ class App extends React.Component {
         })(Box);
 
         return (
+            
             <Box>
+                <Helmet>
+                <title>
+                Bread Calculator
+                </title>
+                </Helmet>
                 <Grid margin="50px" container spacing={1} justify="center">
                     <Grid item xs={12}>
                         <Typ variant="h2" component="h1" display="flex">Sourdough Bread Calculator</Typ>

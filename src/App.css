@@ -14,15 +14,15 @@ text {
 body {
   background-color: rgb(235, 233, 229);
 }
-
+/* 
 .div_button {
   align-self: center;
   align-items: bottom;
   justify-content: center;
   display: flex;
-}
+} */
 
-button {
+/* button {
   display: block;
   margin: auto;
-}
+} */

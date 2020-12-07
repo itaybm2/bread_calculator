@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Helmet from 'react-helmet';
 import FormControl from '@material-ui/core/FormControl';
-import { createMuiTheme, withStyles, styled } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles, makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -13,17 +13,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Pic from "./Collage.png";
 import Grid from '@material-ui/core/Grid';
 
-
-const styles = (theme) => ({
-    root: {},
-    media: {
-        height: 0,
-        width: 0
-    },
-    root: {
-
-    }
-});
 
 class App extends React.Component {
     constructor(props) {
@@ -93,10 +82,11 @@ class App extends React.Component {
                 salt: parseFloat(this.state.fields.salt) / 100
             };
             this.calculateIngredients(dict);
+            this.setState({ errors: {} })
         }
-        else{
-            this.setState({errors});
-               }
+        else {
+            this.setState({ errors });
+        }
     }
 
     clearAll(event) {
@@ -122,13 +112,21 @@ class App extends React.Component {
 
 
     render() {
-        const { classes } = this.props;
+
+
+        const classes = this.props;
 
         const Typ = withStyles({
             root: {
-                color: "#92540d",
+                color: "#4E4E4E",
             }
         })(Typography);
+
+        const myGrid = withStyles({
+            root: {
+                color: 'grey',
+            }
+        })(Grid);
 
         const styledBox = withStyles({
             root: {
@@ -136,22 +134,34 @@ class App extends React.Component {
             }
         })(Box);
 
+
         return (
 
-            <Box>
+            <Grid container spacing={2} style={{flexGrow: 1}}>
                 <Helmet>
                     <title>
                         Bread Calculator
                 </title>
                 </Helmet>
-                <Grid container spacing={4} justify="center">
-                    <Grid style={{ padding: 50 }} item xs={12}>
-                        <Typ variant="h2" component="h1" display="flex">Sourdough Bread Calculator</Typ>
+                <Grid container spacing={2} style={{ flexGrow: 1 }} align='center' justify='space-evenly'>
+                    <Grid style={{ flexGrow:1 ,padding: 50 }} item sm={12}>
+                        <Typ variant="h3" component="h1" >Sourdough Bread Calculator</Typ>
                     </Grid>
-                    <Grid item className="root" lg={2}>
-                        <Box>
-                            <FormControl className="form" onSubmit={this.handleSubmit} >
-                                <Typ variant="h5" >Ingredients:</Typ>
+                    <Grid item container justify='space-around' direction="row" md={4} sm={8} xs={12}
+                        style={{
+                            border: 'solid',
+                            borderWidth: 1,
+                            borderColor: 'black',
+                            borderRadius: 5,
+                            flexgrow: 1,
+                            background: 'white',
+                        }}>
+
+                        <FormControl onSubmit={this.handleSubmit} >
+                            <Grid item sm={12}>
+                                <Typ variant="h5" component="h1" >Ingredients:</Typ>
+                            </Grid>
+                            <Grid item sm={12}>
                                 <TextField
                                     label="Dough Weight"
                                     type="number"
@@ -165,7 +175,8 @@ class App extends React.Component {
                                     helperText={this.state.errors.dough_weight ? "Cannot be empty" : ""}
                                     onChange={this.handleChange.bind(this, "dough_weight")}
                                 />
-
+                            </Grid>
+                            <Grid item sm={12}>
                                 <TextField
                                     label="Hydration"
                                     type="number"
@@ -179,7 +190,9 @@ class App extends React.Component {
                                     value={this.state.fields.hydration}
                                     onChange={this.handleChange.bind(this, "hydration")}
                                 />
+                            </Grid>
 
+                            <Grid item sm={12}>
                                 <TextField
                                     type="number"
                                     label="Starter"
@@ -193,8 +206,10 @@ class App extends React.Component {
                                     value={this.state.fields.starter}
                                     onChange={this.handleChange.bind(this, "starter")}
                                 />
+                            </Grid>
 
-                                <TextField 
+                            <Grid item sm={12}>
+                                <TextField
                                     label="Starter Hydration"
                                     type="number"
                                     name="starter_hydration"
@@ -207,7 +222,9 @@ class App extends React.Component {
                                     value={this.state.fields.starter_hydration}
                                     onChange={this.handleChange.bind(this, "starter_hydration")}
                                 />
+                            </Grid>
 
+                            <Grid item sm={12}>
                                 <TextField
                                     label="Salt"
                                     type="number"
@@ -222,72 +239,81 @@ class App extends React.Component {
                                     value={this.state.fields.salt}
                                     onChange={this.handleChange.bind(this, "salt")}
                                 />
-
-                            </FormControl>
-                        </Box>
+                            </Grid>
+                            <Grid item sm={12}>
+                                <Box margin={5} display="flex" justifyContent="center">
+                                    <Box paddingRight="20%">
+                                        <Button
+                                            variant="outlined"
+                                            type="submit"
+                                            value="Submit"
+                                            gi onClick={this.handleSubmit}
+                                        >Calculate</Button>
+                                    </Box>
+                                    <Box>
+                                        <Button
+                                            border="1px"
+                                            variant="outlined"
+                                            onClick={this.clearAll}
+                                            className="div_button"
+                                        >Clear</Button>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </FormControl>
                     </Grid>
-                    <Grid item md={1} justify="center" className="root">
-                        <Box display="flex-box">
-                            <Typ variant="h5">Totals:</Typ>
-                            <Box>
-                                <strong>Flour: </strong>
-                                <text
-                                    id="result_flour"
+                    <Grid item md={4} sm={8} xs={12}
+                        style={{
+                            border: 'solid',
+                            borderWidth: 1,
+                            borderColor: 'black',
+                            flexgrow: 1,
+                            borderRadius: 5,
+                            background: 'white'
+                        }}>
+                        <Grid item xs={12} sm={12}>
+                            <Typ variant="h4" component="h1">Totals:</Typ>
+                        </Grid>
+                        <Grid item sm={12}>
+                            <Box display="flex-box">
+                                <Typography variant="h6" display="inline" >Flour: </Typography>
+                                <Typography variant="h6" display="inline" id="result_flour"
                                 >0g
-                                </text>
+                            </Typography>
                             </Box>
-                            <Box>
-                                <strong>Water: </strong>
-                                <text
-                                    id="result_water"
+                        </Grid>
+                        <Grid item sm={12}>
+                            <Box margin={4}>
+                                <Typography variant="h6" display="inline" >Water: </Typography>
+                                <Typography variant="h6" display="inline" id="result_water"
                                 >0g
-                                </text>
+                            </Typography>
                             </Box>
-                            <Box>
-                                <strong>Starter: </strong>
-                                <text
-                                    id="result_starter"
-                                >0g
-                                </text>
-                            </Box>
-                            <Box>
-                                <strong>Salt: </strong>
-                                <text
-                                    id="result_salt"
-                                >0g
-                                </text>
-                            </Box>
-                        </Box>
-                    </Grid>
-                    <Grid item md={4}>
-                        <CardMedia src={Pic} component="img"></CardMedia>
-                    </Grid>
-                    <Grid item lg={9} spacing={2}>
-                        <Box margin={5} display="flex" justifyContent="center">
-                            <Box paddingRight="20%">
-                                <Button
-                                    variant="outlined"
-                                    padding="20px"
-                                    type="submit"
-                                    value="Submit"
-                                    gi onClick={this.handleSubmit}
-                                >Calculate</Button>
-                            </Box>
-                            <Box>
-                                <Button
-                                    border="1px"
-                                    padding="40px"
-                                    variant="outlined"
-                                    onClick={this.clearAll}
-                                    className="div_button"
-                                >Clear</Button>
-                            </Box>
-                        </Box>
+                            <Grid item sm={12}>
+                                <Box margin={4}>
+                                    <Typography variant="h6" display="inline" >Starter: </Typography>
+                                    <Typography variant="h6" display="inline" id="result_starter"
+                                    >0g
+                            </Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item sm={12}>
+                                <Box margin={4}>
+                                    <Typography variant="h6" display="inline" >Salt: </Typography>
+                                    <Typography variant="h6" display="inline" id="result_salt"
+                                    >0g
+                                    </Typography>
+                                </Box>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid >
-            </Box>
+                {/* <Grid item xs={12} sm={5} >
+                    <CardMedia src={Pic} component="img"></CardMedia>
+                </Grid> */}
+            </Grid>
         );
     }
 }
 
-export default withStyles(styles)(App);
+export default App;

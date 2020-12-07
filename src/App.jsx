@@ -144,11 +144,11 @@ class App extends React.Component {
                         Bread Calculator
                 </title>
                 </Helmet>
-                <Grid container spacing={1} justify="center">
+                <Grid container spacing={4} justify="center">
                     <Grid style={{ padding: 50 }} item xs={12}>
                         <Typ variant="h2" component="h1" display="flex">Sourdough Bread Calculator</Typ>
                     </Grid>
-                    <Grid item className="root" xs={2}>
+                    <Grid item className="root" lg={2}>
                         <Box>
                             <FormControl className="form" onSubmit={this.handleSubmit} >
                                 <Typ variant="h5" >Ingredients:</Typ>
@@ -226,7 +226,7 @@ class App extends React.Component {
                             </FormControl>
                         </Box>
                     </Grid>
-                    <Grid item xs={1} justify="center" className="root">
+                    <Grid item md={1} justify="center" className="root">
                         <Box display="flex-box">
                             <Typ variant="h5">Totals:</Typ>
                             <Box>

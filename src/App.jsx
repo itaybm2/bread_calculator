@@ -136,7 +136,7 @@ class App extends React.Component {
                     </Grid>
 
 
-                    <Grid item align='center' lg={3} xs={9}>
+                    <Grid item align='center' lg={3} xs={11}>
                         <Box justify='center' justifyContent='center'
                             style={{
                                 height: '100%',

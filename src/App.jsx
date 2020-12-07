@@ -54,28 +54,28 @@ class App extends React.Component {
 
     handleValidation() {
         let fields = this.state.fields;
-        let errors = {};
+        let errors = this.state.errors;
         let formIsValid = true;
 
         if (!fields["dough_weight"]) {
             formIsValid = false;
-            errors["dough_weight"] = "Cannot be empty";
+            this.state.errors["dough_weight"] = "Cannot be empty";
         }
         if (!fields["hydration"]) {
             formIsValid = false;
-            errors["hydration"] = "Cannot be empty";
+            errors.hydration = "Cannot be empty";
         }
         if (!fields["starter"]) {
             formIsValid = false;
-            errors["starter"] = "Cannot be empty";
+            errors.starter = "Cannot be empty";
         }
         if (!fields["starter_hydration"]) {
             formIsValid = false;
-            errors["starter_hydration"] = "Cannot be empty";
+            errors.starter_hydration = "Cannot be empty";
         }
         if (!fields["salt"]) {
             formIsValid = false;
-            errors["salt"] = "Cannot be empty";
+            errors.salt = "Cannot be empty";
         }
         this.setState({ errors: errors });
         return formIsValid;
@@ -83,6 +83,7 @@ class App extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        let errors = this.state.errors;
         if (this.handleValidation()) {
             var dict = {
                 dough_weight: this.state.fields.dough_weight,
@@ -93,6 +94,9 @@ class App extends React.Component {
             };
             this.calculateIngredients(dict);
         }
+        else{
+            this.setState({errors});
+               }
     }
 
     clearAll(event) {
@@ -133,15 +137,15 @@ class App extends React.Component {
         })(Box);
 
         return (
-            
+
             <Box>
                 <Helmet>
-                <title>
-                Bread Calculator
+                    <title>
+                        Bread Calculator
                 </title>
                 </Helmet>
-                <Grid margin="50px" container spacing={1} justify="center">
-                    <Grid item xs={12}>
+                <Grid container spacing={1} justify="center">
+                    <Grid style={{ padding: 50 }} item xs={12}>
                         <Typ variant="h2" component="h1" display="flex">Sourdough Bread Calculator</Typ>
                     </Grid>
                     <Grid item className="root" xs={2}>
@@ -157,6 +161,8 @@ class App extends React.Component {
                                     min="0"
                                     placeholder="Dough Weight in grams"
                                     value={this.state.fields.dough_weight}
+                                    error={this.state.errors.dough_weight}
+                                    helperText={this.state.errors.dough_weight ? "Cannot be empty" : ""}
                                     onChange={this.handleChange.bind(this, "dough_weight")}
                                 />
 
@@ -168,6 +174,8 @@ class App extends React.Component {
                                     min="0"
                                     max="100"
                                     placeholder="Final Hydration"
+                                    error={this.state.errors.hydration}
+                                    helperText={this.state.errors.hydration ? "Cannot be empty" : ""}
                                     value={this.state.fields.hydration}
                                     onChange={this.handleChange.bind(this, "hydration")}
                                 />
@@ -180,11 +188,13 @@ class App extends React.Component {
                                     min="0"
                                     max="100"
                                     placeholder="Starter Percentage"
+                                    error={this.state.errors.starter}
+                                    helperText={this.state.errors.Starter ? "Cannot be empty" : ""}
                                     value={this.state.fields.starter}
                                     onChange={this.handleChange.bind(this, "starter")}
                                 />
 
-                                <TextField
+                                <TextField 
                                     label="Starter Hydration"
                                     type="number"
                                     name="starter_hydration"
@@ -192,6 +202,8 @@ class App extends React.Component {
                                     min="0"
                                     max="100"
                                     placeholder="Starter Hydration"
+                                    error={this.state.errors.starter_hydration}
+                                    helperText={this.state.errors.starter_hydration ? "Cannot be empty" : ""}
                                     value={this.state.fields.starter_hydration}
                                     onChange={this.handleChange.bind(this, "starter_hydration")}
                                 />
@@ -205,6 +217,8 @@ class App extends React.Component {
                                     min="0"
                                     max="100"
                                     placeholder="Salt Percentage"
+                                    error={this.state.errors.salt}
+                                    helperText={this.state.errors.salt ? "Cannot be empty" : ""}
                                     value={this.state.fields.salt}
                                     onChange={this.handleChange.bind(this, "salt")}
                                 />
@@ -245,32 +259,32 @@ class App extends React.Component {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid item md = {4}>
-                            <CardMedia src={Pic} component="img"></CardMedia>
+                    <Grid item md={4}>
+                        <CardMedia src={Pic} component="img"></CardMedia>
                     </Grid>
-                        <Grid item lg={9} spacing={2}>
-                            <Box margin={5} display="flex" justifyContent="center">
-                                <Box paddingRight="20%">
-                                    <Button
-                                        variant="outlined"
-                                        padding="20px"
-                                        type="submit"
-                                        value="Submit"
-                           gi             onClick={this.handleSubmit}
-                                    >Calculate</Button>
-                                </Box>
-                                <Box>
-                                    <Button
-                                        border="1px"
-                                        padding="40px"
-                                        variant="outlined"
-                                        onClick={this.clearAll}
-                                        className="div_button"
-                                    >Clear</Button>
-                                </Box>
+                    <Grid item lg={9} spacing={2}>
+                        <Box margin={5} display="flex" justifyContent="center">
+                            <Box paddingRight="20%">
+                                <Button
+                                    variant="outlined"
+                                    padding="20px"
+                                    type="submit"
+                                    value="Submit"
+                                    gi onClick={this.handleSubmit}
+                                >Calculate</Button>
                             </Box>
-                        </Grid>
-                    </Grid >
+                            <Box>
+                                <Button
+                                    border="1px"
+                                    padding="40px"
+                                    variant="outlined"
+                                    onClick={this.clearAll}
+                                    className="div_button"
+                                >Clear</Button>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid >
             </Box>
         );
     }

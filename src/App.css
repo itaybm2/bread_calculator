@@ -1,24 +1,7 @@
 h1 {
-  font-family: Assistant;
-  font-weight: lighter;
   text-align: center;
-  line-height: 2%;
-  color: rgb(146, 84, 13);
-
 }
 
-.mainTitle {
-  font-size: 40px;
-  font-weight: bolder;
-}
-
-/* .dotted {
-  border-style: dotted;
-  border: 1px dotted #f00;
-  color: #fff;
-  height: 59px;
-  width: 50%;
-} */
 
 strong,
 text {
@@ -27,42 +10,6 @@ text {
   line-height: 300%;
   margin: auto;
 }
-
-.img1,
-.img2 {
-  display: flex;
-  max-height: 60%;
-  max-width: 60%;
-  justify-content: center;
-  border-color: white;
-  border-width: 1px;
-  border-style: solid;
-  margin: auto;
-
-}
-
-
-.column1,
-.column2 {
-  background-color: beige;
-  border-radius: 15px;
-  width: 20%;
-  padding: 2%;
-  justify-content: center;
-  align-items: center;
-  border-style: dashed;
-  border-width: 1px;
-  margin: 2%;
-  border-color: brown;
-}
-
-label {
-  color: black;
-  display: block;
-  font-weight: bold;
-  font-family: Assistant;
-}
-
 
 body {
   background-color: rgb(209, 201, 186);

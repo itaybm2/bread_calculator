@@ -197,7 +197,7 @@ class App extends React.Component {
                                             max="100"
                                             placeholder="Starter Percentage"
                                             error={this.state.errors.starter}
-                                            helperText={this.state.errors.starter ? this.state.errors.Starter : ""}
+                                            helperText={this.state.errors.starter ? this.state.errors.starter : ""}
                                             value={this.state.fields.starter}
                                             onChange={this.handleChange.bind(this, "starter")}
                                         />

@@ -128,184 +128,190 @@ class App extends React.Component {
                 <Helmet>
                     <title>
                         Bread Calculator
-            </title>
+                </title>
+                    <meta name="description" content="Sourdough bread calculator, using baker percentage and dough weight
+                    to calculate your next sourdough bread recipe." />
+                    <meta property="og:title" content="Sourdough Bread Calculator" />
+                    <meta property="og:url" content="https://itaybm2.github.io/bread_calculator/" />
+                    <meta property="og:description" content="Sourdough Bread Calculator"/>
+                    <meta property="og:image" content="./Collage.png"/>
                 </Helmet>
-                <Grid container spacing={5} align='center' justify='space-around'>
-                    <Grid style={{ padding: 50 }} item xs={12} sm={12}>
-                        <Typ variant="h3" component="h1" >Sourdough Bread Calculator</Typ>
-                    </Grid>
+                    <Grid container spacing={5} align='center' justify='space-around'>
+                        <Grid style={{ padding: 50 }} item xs={12} sm={12}>
+                            <Typ variant="h3" component="h1" >Sourdough Bread Calculator</Typ>
+                        </Grid>
 
 
-                    <Grid item align='center' lg={3} xs={11}>
-                        <Box justify='center' justifyContent='center'
-                            style={{
-                                height: '100%',
+                        <Grid item align='center' lg={3} xs={11}>
+                            <Box justify='center' justifyContent='center'
+                                style={{
+                                    height: '100%',
+                                    border: 'solid',
+                                    borderWidth: 1,
+                                    borderColor: 'black',
+                                    borderRadius: 5,
+                                    background: 'white',
+                                }}>
+                                <Grid item md={12} sm={12}>
+                                    <Typ variant="h5" component="h1" >Ingredients:</Typ>
+                                </Grid>
+                                <Grid container align='center' justify='center'>
+
+                                    <FormControl onSubmit={this.handleSubmit} >
+                                        <Grid item xs={12} sm={12} md={12}>
+                                            <TextField
+                                                label="Dough Weight"
+                                                InputProps={{
+                                                    inputProps: {
+                                                        min: 0
+                                                    }
+                                                }}
+                                                name="dough_weight"
+                                                id="dough_weight"
+                                                inputmode="numeric"
+                                                placeholder="Dough Weight in grams"
+                                                value={this.state.fields.dough_weight}
+                                                error={this.state.errors.dough_weight}
+                                                helperText={this.state.errors.dough_weight ? this.state.errors.dough_weight : ""}
+                                                onChange={this.handleChange.bind(this, "dough_weight")}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={12}>
+                                            <TextField
+                                                label="Hydration"
+                                                name="hydration"
+                                                id="hydration"
+                                                InputProps={{
+                                                    inputProps: {
+                                                        min: '0', max: '100'
+                                                    }
+                                                }}
+                                                placeholder="Final Hydration"
+                                                error={this.state.errors.hydration}
+                                                helperText={this.state.errors.hydration ? this.state.errors.hydration : ""}
+                                                value={this.state.fields.hydration}
+                                                onChange={this.handleChange.bind(this, "hydration")}
+                                            />
+                                        </Grid>
+
+                                        <Grid item sm={12}>
+                                            <TextField
+                                                label="Starter"
+                                                name="starter"
+                                                id="starter"
+                                                min="0"
+                                                max="100"
+                                                placeholder="Starter Percentage"
+                                                error={this.state.errors.starter}
+                                                helperText={this.state.errors.starter ? this.state.errors.starter : ""}
+                                                value={this.state.fields.starter}
+                                                onChange={this.handleChange.bind(this, "starter")}
+                                            />
+                                        </Grid>
+
+                                        <Grid item sm={12}>
+                                            <TextField
+                                                label="Starter Hydration"
+                                                name="starter_hydration"
+                                                id="starter_hydration"
+                                                placeholder="Starter Hydration"
+                                                error={this.state.errors.starter_hydration}
+                                                helperText={this.state.errors.starter_hydration ? this.state.errors.starter_hydration : ""}
+                                                value={this.state.fields.starter_hydration}
+                                                onChange={this.handleChange.bind(this, "starter_hydration")}
+                                            />
+                                        </Grid>
+
+                                        <Grid item sm={12}>
+                                            <TextField
+                                                label="Salt"
+                                                name="salt"
+                                                errorte
+                                                id="salt"
+                                                placeholder="Salt Percentage"
+                                                error={this.state.errors.salt}
+                                                helperText={this.state.errors.salt ? "Cannot be empty" : ""}
+                                                value={this.state.fields.salt}
+                                                onChange={this.handleChange.bind(this, "salt")}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={12}>
+                                            <Box margin={5} display="flex" justifyContent="center">
+                                                <Box paddingRight="20%">
+                                                    <Button
+                                                        variant="outlined"
+                                                        type="submit"
+                                                        value="Submit"
+                                                        gi onClick={this.handleSubmit}
+                                                    >Calculate</Button>
+                                                </Box>
+                                                <Box>
+                                                    <Button
+                                                        border="1px"
+                                                        variant="outlined"
+                                                        onClick={this.clearAll}
+                                                        className="div_button"
+                                                    >Clear</Button>
+                                                </Box>
+                                            </Box>
+                                        </Grid>
+                                    </FormControl>
+                                </Grid>
+
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={9} lg={3}>
+                            <Box style={{
                                 border: 'solid',
+                                height: '100%',
                                 borderWidth: 1,
                                 borderColor: 'black',
                                 borderRadius: 5,
                                 background: 'white',
                             }}>
-                            <Grid item md={12} sm={12}>
-                                <Typ variant="h5" component="h1" >Ingredients:</Typ>
-                            </Grid>
-                            <Grid container align='center' justify='center'>
-
-                                <FormControl onSubmit={this.handleSubmit} >
-                                    <Grid item xs={12} sm={12} md={12}>
-                                        <TextField
-                                            label="Dough Weight"
-                                            InputProps={{
-                                                inputProps: {
-                                                    min: 0
-                                                }
-                                            }}
-                                            name="dough_weight"
-                                            id="dough_weight"
-                                            inputmode="numeric"
-                                            placeholder="Dough Weight in grams"
-                                            value={this.state.fields.dough_weight}
-                                            error={this.state.errors.dough_weight}
-                                            helperText={this.state.errors.dough_weight ? this.state.errors.dough_weight : ""}
-                                            onChange={this.handleChange.bind(this, "dough_weight")}
-                                        />
-                                    </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typ style={{ paddingBottom: 20 }} variant="h5" component="h1">Totals:</Typ>
+                                </Grid>
+                                <Grid item sm={12}>
+                                    <Box display="flex-box">
+                                        <Typography variant="h6" display="inline" >Flour: </Typography>
+                                        <Typography variant="h6" display="inline" id="result_flour"
+                                        >0g
+                        </Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item sm={12}>
+                                    <Box margin={4}>
+                                        <Typography variant="h6" display="inline" >Water: </Typography>
+                                        <Typography variant="h6" display="inline" id="result_water"
+                                        >0g
+                        </Typography>
+                                    </Box>
                                     <Grid item sm={12}>
-                                        <TextField
-                                            label="Hydration"
-                                            name="hydration"
-                                            id="hydration"
-                                            InputProps={{
-                                                inputProps: {
-                                                    min: '0', max: '100'
-                                                }
-                                            }}
-                                            placeholder="Final Hydration"
-                                            error={this.state.errors.hydration}
-                                            helperText={this.state.errors.hydration ? this.state.errors.hydration : ""}
-                                            value={this.state.fields.hydration}
-                                            onChange={this.handleChange.bind(this, "hydration")}
-                                        />
-                                    </Grid>
-
-                                    <Grid item sm={12}>
-                                        <TextField
-                                            label="Starter"
-                                            name="starter"
-                                            id="starter"
-                                            min="0"
-                                            max="100"
-                                            placeholder="Starter Percentage"
-                                            error={this.state.errors.starter}
-                                            helperText={this.state.errors.starter ? this.state.errors.starter : ""}
-                                            value={this.state.fields.starter}
-                                            onChange={this.handleChange.bind(this, "starter")}
-                                        />
-                                    </Grid>
-
-                                    <Grid item sm={12}>
-                                        <TextField
-                                            label="Starter Hydration"
-                                            name="starter_hydration"
-                                            id="starter_hydration"
-                                            placeholder="Starter Hydration"
-                                            error={this.state.errors.starter_hydration}
-                                            helperText={this.state.errors.starter_hydration ? this.state.errors.starter_hydration : ""}
-                                            value={this.state.fields.starter_hydration}
-                                            onChange={this.handleChange.bind(this, "starter_hydration")}
-                                        />
-                                    </Grid>
-
-                                    <Grid item sm={12}>
-                                        <TextField
-                                            label="Salt"
-                                            name="salt"
-                                            errorte
-                                            id="salt"
-                                            placeholder="Salt Percentage"
-                                            error={this.state.errors.salt}
-                                            helperText={this.state.errors.salt ? "Cannot be empty" : ""}
-                                            value={this.state.fields.salt}
-                                            onChange={this.handleChange.bind(this, "salt")}
-                                        />
-                                    </Grid>
-                                    <Grid item sm={12}>
-                                        <Box margin={5} display="flex" justifyContent="center">
-                                            <Box paddingRight="20%">
-                                                <Button
-                                                    variant="outlined"
-                                                    type="submit"
-                                                    value="Submit"
-                                                    gi onClick={this.handleSubmit}
-                                                >Calculate</Button>
-                                            </Box>
-                                            <Box>
-                                                <Button
-                                                    border="1px"
-                                                    variant="outlined"
-                                                    onClick={this.clearAll}
-                                                    className="div_button"
-                                                >Clear</Button>
-                                            </Box>
+                                        <Box margin={4}>
+                                            <Typography variant="h6" display="inline" >Starter: </Typography>
+                                            <Typography variant="h6" display="inline" id="result_starter"
+                                            >0g
+                        </Typography>
                                         </Box>
                                     </Grid>
-                                </FormControl>
-                            </Grid>
-
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={9} lg={3}>
-                        <Box style={{
-                            border: 'solid',
-                            height: '100%',
-                            borderWidth: 1,
-                            borderColor: 'black',
-                            borderRadius: 5,
-                            background: 'white',
-                        }}>
-                            <Grid item xs={12} sm={12}>
-                                <Typ style={{ paddingBottom: 20 }} variant="h5" component="h1">Totals:</Typ>
-                            </Grid>
-                            <Grid item sm={12}>
-                                <Box display="flex-box">
-                                    <Typography variant="h6" display="inline" >Flour: </Typography>
-                                    <Typography variant="h6" display="inline" id="result_flour"
-                                    >0g
-                        </Typography>
-                                </Box>
-                            </Grid>
-                            <Grid item sm={12}>
-                                <Box margin={4}>
-                                    <Typography variant="h6" display="inline" >Water: </Typography>
-                                    <Typography variant="h6" display="inline" id="result_water"
-                                    >0g
-                        </Typography>
-                                </Box>
-                                <Grid item sm={12}>
-                                    <Box margin={4}>
-                                        <Typography variant="h6" display="inline" >Starter: </Typography>
-                                        <Typography variant="h6" display="inline" id="result_starter"
-                                        >0g
-                        </Typography>
-                                    </Box>
-                                </Grid>
-                                <Grid item sm={12}>
-                                    <Box margin={4}>
-                                        <Typography variant="h6" display="inline" >Salt: </Typography>
-                                        <Typography variant="h6" display="inline" id="result_salt"
-                                        >0g
+                                    <Grid item sm={12}>
+                                        <Box margin={4}>
+                                            <Typography variant="h6" display="inline" >Salt: </Typography>
+                                            <Typography variant="h6" display="inline" id="result_salt"
+                                            >0g
                                 </Typography>
-                                    </Box>
+                                        </Box>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Box>
-                    </Grid>
-                    <Grid alignContent='center' align='center' item xs={12} sm={8} md={4}>
-                        <CardMedia src={Pic} component="img"></CardMedia>
-                    </Grid>
-                </Grid >
-            </Box>
+                            </Box>
+                        </Grid>
+                        <Grid alignContent='center' align='center' item xs={12} sm={8} md={4}>
+                            <CardMedia src={Pic} component="img"></CardMedia>
+                        </Grid>
+                    </Grid >
+            </Box >
 
 
         );

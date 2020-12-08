@@ -134,7 +134,7 @@ class App extends React.Component {
                     <meta property="og:title" content="Sourdough Bread Calculator" />
                     <meta property="og:url" content="https://itaybm2.github.io/bread_calculator/" />
                     <meta property="og:description" content="Sourdough Bread Calculator"/>
-                    <meta property="og:image" content="./Collage.jpeg"/>
+                    <meta property="og:image" content="./Collage.jpg"/>
                     <meta property="og:type" content="article" />
                 </Helmet>
                     <Grid container spacing={5} align='center' justify='space-around'>

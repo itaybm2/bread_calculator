@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bread_calculator/static/css/main.3b78850f.chunk.css",
-    "main.js": "/bread_calculator/static/js/main.c70b5e8d.chunk.js",
-    "main.js.map": "/bread_calculator/static/js/main.c70b5e8d.chunk.js.map",
+    "main.js": "/bread_calculator/static/js/main.5ba2616d.chunk.js",
+    "main.js.map": "/bread_calculator/static/js/main.5ba2616d.chunk.js.map",
     "runtime-main.js": "/bread_calculator/static/js/runtime-main.d721c266.js",
     "runtime-main.js.map": "/bread_calculator/static/js/runtime-main.d721c266.js.map",
     "static/js/2.d937ba0a.chunk.js": "/bread_calculator/static/js/2.d937ba0a.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.d721c266.js",
     "static/js/2.d937ba0a.chunk.js",
     "static/css/main.3b78850f.chunk.css",
-    "static/js/main.c70b5e8d.chunk.js"
+    "static/js/main.5ba2616d.chunk.js"
   ]
 }

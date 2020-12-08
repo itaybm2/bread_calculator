@@ -1,1 +1,0 @@
-ssh -i "Key_Pair_Bot.pem" ec2-user@ec2-54-200-250-221.us-west-2.compute.amazonaws.com

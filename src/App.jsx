@@ -124,12 +124,12 @@ class App extends React.Component {
 
 
         return (
-            <Box margin={5}>
+            <Box margin={15}>
                 <Helmet>
                     <title>
                         Bread Calculator
                     </title>
-                    
+
                 </Helmet>
                 <Grid container spacing={5} align='center' justify='space-around'>
                     <Grid style={{ padding: 50 }} item xs={12} sm={12}>
@@ -137,10 +137,11 @@ class App extends React.Component {
                     </Grid>
 
 
-                    <Grid item align='center' lg={3} xs={11}>
-                        <Box justify='center' justifyContent='center'
+                    <Grid item align='center' xs={12} sm={9} lg={3} >
+                        <Box
                             style={{
                                 height: '100%',
+                                width:'100',
                                 border: 'solid',
                                 borderWidth: 1,
                                 borderColor: 'black',
@@ -150,10 +151,10 @@ class App extends React.Component {
                             <Grid item md={12} sm={12}>
                                 <Typ variant="h5" component="h1" >Ingredients:</Typ>
                             </Grid>
-                            <Grid container align='center' justify='center'>
+                            <Grid container item align='center' justify='center'>
 
                                 <FormControl onSubmit={this.handleSubmit} >
-                                    <Grid item xs={12} sm={12} md={12}>
+                                    <Grid item display='flex' justifyContent='center'>
                                         <TextField
                                             label="Dough Weight"
                                             InputProps={{
@@ -171,7 +172,7 @@ class App extends React.Component {
                                             onChange={this.handleChange.bind(this, "dough_weight")}
                                         />
                                     </Grid>
-                                    <Grid item sm={12}>
+                                    <Grid item xs={12} sm={12} md={12}>
                                         <TextField
                                             label="Hydration"
                                             name="hydration"
@@ -256,7 +257,7 @@ class App extends React.Component {
                         </Box>
                     </Grid>
 
-                    <Grid item xs={9} lg={3}>
+                    <Grid item xs={12} sm={9} lg={3} >
                         <Box style={{
                             border: 'solid',
                             height: '100%',
@@ -302,7 +303,7 @@ class App extends React.Component {
                             </Grid>
                         </Box>
                     </Grid>
-                    <Grid alignContent='center' align='center' item xs={12} sm={8} md={4}>
+                    <Grid item alignContent='center' align='center' item xs={12} lg={5}>
                         <CardMedia src={Pic} component="img"></CardMedia>
                     </Grid>
                 </Grid >
